@@ -1,53 +1,48 @@
--- Users
-INSERT INTO Users (id, username, email, password, created_at) VALUES
-(1, 'john_doe', 'john.doe@email.com', 'password123', '2024-02-11 08:30:00'),
-(2, 'alice_smith', 'alice.smith@email.com', 'securepass', '2024-02-10 12:45:00'),
-(3, 'bob_jones', 'bob.jones@email.com', 'pass123word', '2024-02-12 15:20:00');
+-- Dla tabeli users
+INSERT INTO users (id, username, email, password) VALUES
+(1, 'jan_kowalski', 'jan.kowalski@example.com', 'haslo123'),
+(2, 'anna_nowak', 'anna.nowak@example.com', 'secret456'),
+(3, 'tomasz_wisniewski', 'tomasz.wisniewski@example.com', 'secure789');
 
--- Tasks
-INSERT INTO Tasks (id, user_id, title, description, category, created_at, due_date, priority, isComplete) VALUES
-(1, 1, 'Project Meeting', 'Discuss project updates and plan upcoming tasks', 'Meeting', '2024-02-11 10:00:00', '2024-02-15', 2, 0),
-(2, 2, 'Write Report', 'Prepare a detailed report on the latest market trends', 'Work', '2024-02-10 13:30:00', '2024-02-14', 1, 1),
-(3, 3, 'Task Assignment', 'Assign tasks to team members for the upcoming sprint', 'Planning', '2024-02-12 16:45:00', '2024-02-18', 3, 0);
+-- Dla tabeli tasks
+INSERT INTO tasks (id, user_id, title, description, category, due_date, priority, is_complete, recurrence_id) VALUES
+(1, 1, 'Przygotowanie raportu', 'Przygotować raport końcowy z wynikami projektu', 'Biznes', '2024-02-25', 1, 0, null),
+(2, 2, 'Zakupy spożywcze', 'Zakupić produkty spożywcze na cały tydzień', 'Dom', '2024-02-20', 2, 0, null),
+(3, 3, 'Trening na siłowni', 'Realizacja treningu siłowego według planu', 'Fitness', null, 3, 0, 1);
 
--- Recurrence
-INSERT INTO Recurrence (id, task_id, frequency, taskInterval, days) VALUES
-(1, 1, 'Weekly', 1, 'Monday'),
-(2, 2, 'Monthly', 2, 'Tuesday, Friday'),
-(3, 3, 'Daily', 1, 'Weekdays');
+-- Dla tabeli recurrence
+INSERT INTO recurrence (id, task_id, frequency, task_interval, days) VALUES
+(1, 3, 'Tygodniowo', 1, 'poniedziałek, środa, piątek'),
+(2, 3, 'Miesięcznie', 1, '1');
 
--- Subtasks
-INSERT INTO Subtasks (id, task_id, name, type, isComplete) VALUES
-(1, 1, 'Research', 'Research', 0),
-(2, 2, 'Introduction', 'Writing', 1),
-(3, 3, 'Task List', 'Planning', 0);
+-- Dla tabeli subtasks
+INSERT INTO subtasks (id, task_id, name, type, is_complete) VALUES
+(1, 1, 'Przygotowanie danych', 'Przygotowanie danych do raportu', 0),
+(2, 1, 'Analiza wyników', 'Analiza zebranych danych', 0),
+(3, 2, 'Zakupy spożywcze', 'Zakupy spożywcze na obiad', 0);
 
--- Exercises
-INSERT INTO Exercises (id, task_id, type, set_count, reps, isComplete) VALUES
-(1, 1, 'Cardio', 3, 15, 0),
-(2, 2, 'Strength Training', 4, 12, 1),
-(3, 3, 'Yoga', 1, 10, 0);
+-- Dla tabeli exercises
+INSERT INTO exercises (id, task_id, type, set_count, reps, is_complete) VALUES
+(1, 3, 'Podciąganie', 3, 10, 0),
+(2, 3, 'Przysiady', 4, 15, 0);
 
--- Tasks_Exercises
-INSERT INTO Tasks_Exercises (task_id, exercise_id) VALUES
+-- Dla tabeli tasks_exercises
+INSERT INTO tasks_exercises (task_id, exercise_id) VALUES
+(3, 1),
+(3, 2);
+
+-- Dla tabeli tasks_subtasks
+INSERT INTO tasks_subtasks (task_id, subtask_id) VALUES
 (1, 1),
-(2, 2),
-(3, 3);
+(1, 2),
+(2, 3);
 
--- Tasks_Subtasks
-INSERT INTO Tasks_Subtasks (task_id, subtask_id) VALUES
-(1, 1),
-(2, 2),
-(3, 3);
+-- Dla tabeli notification
+INSERT INTO notification (id, user_id, task_id, type, message, received_time) VALUES
+(1, 1, 1, 'Przypomnienie', 'Raport do zrobienia', '2024-02-24 10:00:00'),
+(2, 2, 2, 'Przypomnienie', 'Zakupy spożywcze', '2024-02-19 15:30:00');
 
--- Notification
-INSERT INTO Notification (id, user_id, task_id, type, message, received_time) VALUES
-(1, 1, 1, 'Reminder', 'Don''t forget the meeting at 10 AM', '2024-02-11 09:30:00'),
-(2, 2, 2, 'Deadline', 'The report is due tomorrow. Ensure it is complete', '2024-02-13 16:00:00'),
-(3, 3, 3, 'New Task', 'You have been assigned new tasks. Check your dashboard', '2024-02-12 17:30:00');
-
--- Achievement
-INSERT INTO Achievement (id, user_id, name, description, received_date) VALUES
-(1, 1, 'Productive Day', 'Completed all tasks for the day', '2024-02-11'),
-(2, 2, 'Task Master', 'Completed 100 tasks', '2024-02-10'),
-(3, 3, 'Early Bird', 'Completed a task before 9 AM', '2024-02-12');
+-- Dla tabeli achievement
+INSERT INTO achievement (id, user_id, name, description, received_date) VALUES
+(1, 1, 'Master Productivity', 'Ukończ wszystkie zaplanowane zadania', '2024-03-01'),
+(2, 2, 'Healthy Living', 'Zrealizuj 30 treningów w ciągu miesiąca', '2024-03-15');
