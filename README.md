@@ -2,7 +2,7 @@
 
 ## Description
 
-Welcome to the Task Scheduler and Planner App! This platform is designed to help users efficiently plan their day by scheduling tasks, managing workouts, setting reminders, and organizing their daily activities. The application is developed using Spring Boot and integrates with technologies such as Hibernate for data persistence.
+Welcome to the task scheduler app! This platform is designed to help users efficiently plan their day by scheduling tasks, managing workouts, setting reminders, and organizing their daily activities. The application is developed using Spring Boot and integrates with technologies such as Hibernate for data persistence.
 
 ## Features
 
@@ -61,4 +61,4 @@ This project is licensed under the [MIT License](LICENSE). All modifications to 
 
 **Creation Date:** 18 February 2024
 
-Thank you for exploring our Task Scheduler and Planner App!
+Thank you for exploring Day Plan Master App!
