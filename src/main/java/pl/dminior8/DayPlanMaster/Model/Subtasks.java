@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 @Embeddable
 @Data
-@Entity
+@Entity(name="subtasks")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Subtask {
+public class Subtasks {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 }

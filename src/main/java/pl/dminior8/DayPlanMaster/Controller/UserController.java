@@ -6,7 +6,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.dminior8.DayPlanMaster.Model.Task;
 import pl.dminior8.DayPlanMaster.Model.User;
 import pl.dminior8.DayPlanMaster.Service.UserService;
 

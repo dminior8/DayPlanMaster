@@ -10,16 +10,17 @@ import java.util.List;
 
 @Data
 @Entity
+@Embeddable
 @Table(name = "recurrence")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Recurrence {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String frequency;
     private int task_interval;
-    private List<String> days;
+    private String days;
 }
 
 

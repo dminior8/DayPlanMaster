@@ -11,12 +11,14 @@ import java.util.List;
 
 
 @Data
-@Entity(name = "tasks")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+@Entity(name = "tasks")
+public class Tasks {
+
+
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long user_id;
     private String title;
@@ -27,10 +29,10 @@ public class Task {
     private int is_complete;
     private String priority;
 
-//    @OneToOne
-//    private Recurrence recurrence;
-//
-//    @ElementCollection
-//    private List<Subtask> subtasks;
+    @OneToOne
+    private Recurrence recurrence;
+
+    @ElementCollection
+    private List<Subtasks> subtasks;
 
 }

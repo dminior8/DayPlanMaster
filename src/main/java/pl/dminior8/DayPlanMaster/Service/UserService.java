@@ -2,7 +2,6 @@ package pl.dminior8.DayPlanMaster.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.dminior8.DayPlanMaster.Model.Task;
 import pl.dminior8.DayPlanMaster.Model.User;
 import pl.dminior8.DayPlanMaster.Repository.UserRepository;
 
