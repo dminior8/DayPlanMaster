@@ -19,18 +19,20 @@ public class Tasks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long user_id;
+    private int id;
+    private int user_id;
     private String title;
     private String description;
     private String category;
     private Timestamp created_at;
     private Date due_date;
-    private int is_complete;
+    private Boolean is_complete;
     private String priority;
 
     @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "task_id")
     private Recurrence recurrence;
+
 
     @ElementCollection
     private List<Subtasks> subtasks;

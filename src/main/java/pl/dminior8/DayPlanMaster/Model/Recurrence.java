@@ -17,9 +17,10 @@ import java.util.List;
 public class Recurrence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+    private int task_id;
     private String frequency;
-    private int task_interval;
+    private int task_interval; //jak dużo na raz
     private String days;
 }
 
