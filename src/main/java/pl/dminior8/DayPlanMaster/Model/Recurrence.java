@@ -22,6 +22,10 @@ public class Recurrence {
     private String frequency;
     private int task_interval; //jak dużo na raz
     private String days;
+
+    public static enum Frequency{
+        DAILY, WEAKLY, MONTHLY
+    }
 }
 
 

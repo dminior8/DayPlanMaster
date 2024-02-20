@@ -20,6 +20,8 @@ import java.util.Optional;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static pl.dminior8.DayPlanMaster.Model.Tasks.Category.WORK;
+import static pl.dminior8.DayPlanMaster.Model.Tasks.Priority.HIGH;
 
 @SpringBootTest
 class TasksTest {
@@ -32,15 +34,15 @@ class TasksTest {
 
     @Test
     void testAllTasks() {
-        String category = "work";
+        Tasks.Category category = WORK;
         // Arrange
         List<Tasks> mockTasksList = Arrays.asList(
-                new Tasks(1, 1, "Create POST mapping", null, "work",
+                new Tasks(1, 1, "Create POST mapping", null, WORK,
                         Timestamp.valueOf(LocalDateTime.now()), Date.valueOf("2024-02-20"),
-                        false,"high",null,null),
+                        false,HIGH,null,null),
                 new Tasks(1, 1, "Create rest CRUD mappings", "Really important things",
-                        "work", Timestamp.valueOf(LocalDateTime.now()), Date.valueOf("2024-02-24"),
-                        false, "high", null,
+                        WORK, Timestamp.valueOf(LocalDateTime.now()), Date.valueOf("2024-02-24"),
+                        false, HIGH, null,
                         Arrays.asList(
                         new Subtasks(1, "PUT", false),
                         new Subtasks(2, "DELETE", false),
@@ -66,16 +68,16 @@ class TasksTest {
 
     @Test
     void testAllTasksByCategory() {
-        String category = "work";
+        Tasks.Category category = WORK;
         // Arrange
         Tasks mockTask = new Tasks(1, 1, "Create POST mapping", null, category,
                 Timestamp.valueOf(LocalDateTime.now()), Date.valueOf("2024-02-20"),
-                false,"high",null,null);
+                false,HIGH,null,null);
 
         when(tasksRepository.findTasksByCategory(category)).thenReturn(Optional.of(mockTask));
 
         // Act
-        Optional<Tasks> result = tasksService.getAllByCategory(category);
+        Optional<Tasks> result = tasksService.allByCategory(category.toString());
 
         // Assert
         Assertions.assertTrue(result.isPresent());

@@ -3,7 +3,7 @@ CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
+  user_password VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -12,12 +12,12 @@ CREATE TABLE tasks (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
   title VARCHAR(60) NOT NULL,
-  description VARCHAR(255),
-  category ENUM('work', 'education', 'training', 'hobby', 'other'),
+  task_description VARCHAR(255),
+  category ENUM('WORK', 'EDUCATION', 'TRAINING', 'HOBBY', 'OTHER') DEFAULT 'OTHER',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   due_date DATE,
-  priority ENUM('high', 'medium', 'low', 'routine', 'long-term'),
   is_complete TINYINT DEFAULT 0,
+  priority ENUM('HIGH', 'MEDIUM', 'LOW'),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE tasks (
 CREATE TABLE recurrence (
   id INT PRIMARY KEY AUTO_INCREMENT,
   task_id INT NOT NULL,
-  frequency ENUM('daily', 'weekly', 'monthly'),
+  frequency ENUM('DAILY', 'WEEKLY', 'MONTHLY'),
   task_interval INT DEFAULT 1,
   days VARCHAR(255),
   FOREIGN KEY (task_id) REFERENCES tasks (id)
@@ -35,8 +35,8 @@ CREATE TABLE recurrence (
 CREATE TABLE subtasks (
   id INT PRIMARY KEY AUTO_INCREMENT,
   task_id INT NOT NULL,
-  name VARCHAR(255),
-  is_complete TINYINT DEFAULT 0,
+  title VARCHAR(60),
+  is_done TINYINT DEFAULT 0,
   FOREIGN KEY (task_id) REFERENCES tasks (id)
 );
 
@@ -44,10 +44,10 @@ CREATE TABLE subtasks (
 CREATE TABLE exercises (
   id INT PRIMARY KEY AUTO_INCREMENT,
   task_id INT NOT NULL,
-  type ENUM ('arms', 'chest', 'back', 'legs', 'other'),
-  set_count INT DEFAULT 0,
-  reps INT DEFAULT 0,
-  is_complete TINYINT DEFAULT 0,
+  exercise_category ENUM ('ARMS', 'CHEST', 'BACK', 'LEGS', 'OTHER'),
+  set_count INT,
+  reps INT,
+  is_done TINYINT DEFAULT 0,
   FOREIGN KEY (task_id) REFERENCES tasks (id)
 );
 
@@ -67,22 +67,30 @@ CREATE TABLE tasks_subtasks (
   FOREIGN KEY (subtasks_id) REFERENCES subtasks (id)
 );
 
--- Create Notification table
-CREATE TABLE notification (
+-- Create Notifications table
+CREATE TABLE notifications (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
-  type ENUM('reminder', 'achivement', 'error', 'confirmation', 'other'),
+  category ENUM('REMINDER', 'ACHIVEMENT', 'ERROR', 'CONFIRMATION', 'OTHER'),
   message VARCHAR(255) NOT NULL,
   received_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
--- Create Achievement table
-CREATE TABLE achievement (
-  id INT PRIMARY KEY AUTO_INCREMENT,
+-- Create User_Achievements table
+CREATE TABLE user_achievements (
+  id INT PRIMARY KEY,
   user_id INT NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  description VARCHAR(255),
+  current_value INT DEFAULT 0,
   received_date DATE,
   FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create Achievements table
+CREATE TABLE achievements (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  achivement_description VARCHAR(255),
+  expected_value INT NOT NULL,
+  FOREIGN KEY (id) REFERENCES user_achievements(id)
 );

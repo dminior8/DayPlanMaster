@@ -21,9 +21,11 @@ public class TasksService {
         return tasksRepository.findAll();
     }
 
-    public Optional<Tasks> getAllByCategory(String category){
-        return tasksRepository.findTasksByCategory(category);
+    public Optional<Tasks> allByCategory(String category){
+        return tasksRepository.findTasksByCategory(Tasks.Category.valueOf(category.toUpperCase()));
     }
+
+
     //    public void saveTaskWithSubtasks(List<Subtask> subtaskList) {
 //        Task task = new Task();
 //        task.setSubtasks(subtaskList);
