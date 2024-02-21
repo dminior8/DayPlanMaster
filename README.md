@@ -14,7 +14,7 @@ Welcome to the task scheduler app! This platform is designed to help users effic
 
 4. **Efficient Day Management:** The app provides a user-friendly interface to manage your day efficiently, keeping everything in one place.
 
-More about Business Logic you can find in <a href link="https://github.com/dminior8/DayPlanMaster/blob/main/BusinessDayPlanMaster.pdf">this<a/> file
+More about Business Logic you can find in file <b>BusinessDayPlanMaster.pdf</b>.
 
 ## Technologies
 
