@@ -1,4 +1,4 @@
-package pl.dminior8.DayPlanMaster.Model;
+package pl.dminior8.DayPlanMaster.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor

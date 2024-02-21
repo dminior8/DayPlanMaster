@@ -1,4 +1,4 @@
-package pl.dminior8.DayPlanMaster.Model;
+package pl.dminior8.DayPlanMaster.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,7 +7,7 @@ import lombok.*;
 //@Entity(name = "exercises")
 @Data
 //@DiscriminatorValue("TRAINING")
-public class Exercises{
+public class Exercise {
     @Id
     private int id;
     @Enumerated(EnumType.STRING)

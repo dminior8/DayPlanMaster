@@ -1,11 +1,11 @@
-package pl.dminior8.DayPlanMaster.Model;
+package pl.dminior8.DayPlanMaster.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.dminior8.DayPlanMaster.Service.Converters.CategoryConverter;
-import pl.dminior8.DayPlanMaster.Service.Converters.PriorityConverter;
+import pl.dminior8.DayPlanMaster.converter.CategoryConverter;
+import pl.dminior8.DayPlanMaster.converter.PriorityConverter;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "tasks")
 //@DiscriminatorColumn(name = "category", discriminatorType = DiscriminatorType.STRING)
-public class Tasks {
+public class Task {
 
 
     @Id
@@ -40,7 +40,7 @@ public class Tasks {
     @ElementCollection
     //@OneToMany(mappedBy = "tasks", cascade = CascadeType.ALL, orphanRemoval = true)
     //@JoinColumn(name = "task_id")
-    private List<Subtasks> subtasks;
+    private List<Subtask> subtasks;
 
     @Convert(converter = CategoryConverter.class)
     public static enum Category{
