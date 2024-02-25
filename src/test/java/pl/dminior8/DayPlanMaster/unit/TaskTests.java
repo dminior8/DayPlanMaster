@@ -3,8 +3,10 @@ package pl.dminior8.DayPlanMaster.unit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import pl.dminior8.DayPlanMaster.model.Subtask;
@@ -19,11 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static pl.dminior8.DayPlanMaster.model.Task.Category.EDUCATION;
 import static pl.dminior8.DayPlanMaster.model.Task.Category.WORK;
 import static pl.dminior8.DayPlanMaster.model.Task.Priority.HIGH;
 
@@ -95,10 +94,44 @@ class TaskTests {
         assertEquals(result, tasks);
         verify(tasksRepository, times(1)).findTaskById(taskId);
     }
+    @Test
+    public void shouldUpdateSingleTaskById() {
+        //given
+        Task existingTask = prepareDataToTests().getFirst();
+        Task updatedTask = prepareDataToTests().get(1);
+        int existingId = 0;
+        when(tasksRepository.findTaskById(existingId)).thenReturn(Optional.of(existingTask));
+        when(tasksRepository.save(updatedTask)).thenReturn(updatedTask);
 
+        //when
+        Task result = tasksService.updateSingleTaskById(existingId, updatedTask);
+
+        //then
+        Assertions.assertNotNull(result);
+        assertEquals(updatedTask.getId(), result.getId());
+
+        verify(tasksRepository, times(1)).findTaskById(existingId);
+        verify(tasksRepository, times(1)).deleteById(existingId);
+        verify(tasksRepository, times(1)).save(updatedTask);
+    }
+    @Test
+    public void shouldUpdateByCreateSingleTaskById() {
+        //given
+        int notExistingId = 3;
+        Task updatedTask = prepareDataToTests().get(1);
+        when(tasksRepository.findTaskById(notExistingId)).thenReturn(null);
+
+        //when
+        Task result = tasksService.updateSingleTaskById(notExistingId, updatedTask);
+
+        //then
+        Assertions.assertNull(result);
+        verify(tasksRepository, times(1)).findTaskById(notExistingId);
+        verify(tasksRepository, never()).deleteById(anyInt());
+    }
     private List<Task> prepareDataToTests(){
         return Arrays.asList(
-                new Task(1, 1, "Create POST mapping", null, WORK,
+                new Task(0, 1, "Create POST mapping", null, WORK,
                         Timestamp.valueOf(LocalDateTime.now()), Date.valueOf("2024-02-20"),
                         false,HIGH,null,null),
 

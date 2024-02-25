@@ -33,14 +33,25 @@ public class TasksService {
     public Optional<Task> writeSingleTaskById(int id){
         return tasksRepository.findTaskById(id);
     }
-//TODO
-    //    public Optional<Task> updateSingleTaskById(int id){
-//        if(movie != null){
-//            movie.setName(updatedMovie.getName());
-//            movie.setRating(updatedMovie.getRating());
-//
-//            movieRepository.update(movie);
-//        return tasksRepository.findTaskById(id);
-//    }
+
+    public Optional<Task> deleteTaskById(int id){
+        Optional <Task> tempTask = tasksRepository.findTaskById(id);
+
+        if(tempTask.isPresent()){
+            tasksRepository.deleteById(id);
+        }
+        return tempTask;
+    }
+
+    public Task updateSingleTaskById(int id, Task task) {
+        Optional<Task> existingTask = tasksRepository.findTaskById(id);
+
+        if(existingTask != null && existingTask.isPresent()){
+            tasksRepository.deleteById(id);
+        }
+        task.setId(id);
+
+        return tasksRepository.save(task);
+    }
 }
 
